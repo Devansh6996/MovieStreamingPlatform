@@ -1,0 +1,278 @@
+STREAMFLEX PROJECT MANUAL
+
+This file explains in simple English how the project works, how the parts connect, and what happens step by step.
+
+--------------------------------------------------
+1. WHAT THIS PROJECT IS
+--------------------------------------------------
+This is a streaming platform website like Netflix and Hotstar, but with a custom design and a simpler structure.
+
+It has:
+- a public homepage for visitors
+- a beautiful dark streaming-style UI
+- an admin page for managing content
+- login protection for the admin area
+- a setup ready for Azure hosting later
+
+--------------------------------------------------
+2. MAIN FOLDER
+--------------------------------------------------
+The project is created inside the folder:
+
+streamflix
+
+Inside it, the main app files are in:
+- app/
+- lib/
+
+--------------------------------------------------
+3. PUBLIC HOMEPAGE
+--------------------------------------------------
+The home page is in:
+
+app/page.tsx
+
+This page is what visitors see when they open the website.
+
+It does the following:
+1. loads the media data
+2. takes the list of movies/shows
+3. shows the hero section
+4. shows trending cards
+5. displays featured content
+
+So the homepage is like the front page of a streaming website.
+
+--------------------------------------------------
+4. HOW CONTENT IS STORED
+--------------------------------------------------
+The media data is managed in:
+
+lib/media.ts
+
+This file contains:
+- the movie/show list
+- title
+- type
+- genre
+- description
+- poster image URL
+- video URL
+- year
+- rating
+- duration
+
+There are two main functions:
+- getMediaData() = reads content
+- saveMediaData() = saves new content
+
+The app also keeps a default list of example movies/shows if no saved file exists.
+
+--------------------------------------------------
+5. WHY THE PUBLIC SITE CAN SHOW CONTENT
+--------------------------------------------------
+The homepage calls the getMediaData() function from lib/media.ts.
+
+That function reads the data and returns a list of items.
+Then the homepage maps over the list and displays a card for each item.
+
+Example flow:
+1. data is loaded
+2. array is received
+3. page loops over array
+4. each item is shown as a card
+
+That is how the site displays content.
+
+--------------------------------------------------
+6. ADMIN PAGE
+--------------------------------------------------
+The admin page is in:
+
+app/admin/page.tsx
+
+This page is only for the person managing the website.
+
+It lets the admin:
+- add a movie or show
+- enter title, genre, type, description
+- add poster URL
+- add video URL
+- add duration and rating
+- save the content
+
+The admin page also shows the current library of content so the admin can see what is already available.
+
+--------------------------------------------------
+7. HOW CONTENT IS ADDED BY ADMIN
+--------------------------------------------------
+When admin submits the form:
+1. the form data is collected
+2. the page creates a new object with all the values
+3. it reads the existing content list
+4. it adds the new item at the top
+5. it saves the updated list
+6. the admin sees success message
+
+This means the site can grow with new content without editing code manually.
+
+--------------------------------------------------
+8. ADMIN LOGIN
+--------------------------------------------------
+The admin login page is:
+
+app/admin/login/page.tsx
+
+This page asks for:
+- username
+- password
+
+When the admin submits these values, the app sends them to:
+
+app/api/admin/login/route.ts
+
+That route checks if the values match the saved environment values.
+
+If the values match, the app creates a session cookie and allows access.
+
+--------------------------------------------------
+9. HOW SECURITY WORKS
+--------------------------------------------------
+The security logic is in:
+
+lib/admin.ts
+
+This file contains:
+- admin username
+- admin password
+- session secret
+- session creator function
+- authentication check function
+
+The values are read from:
+
+.env.local
+
+This file stores important settings like:
+- ADMIN_USERNAME
+- ADMIN_PASSWORD
+- ADMIN_SESSION_SECRET
+
+This keeps the login details away from the main source code.
+
+--------------------------------------------------
+10. HOW THE SITE PROTECTS THE ADMIN AREA
+--------------------------------------------------
+The file:
+
+middleware.ts
+
+checks whether a user is allowed to access pages inside /admin.
+
+If the user tries to open the admin page without a valid session cookie, the app redirects them to the login page.
+
+So the admin area is protected.
+
+--------------------------------------------------
+11. HOW LOGOUT WORKS
+--------------------------------------------------
+Logout uses:
+
+app/api/admin/logout/route.ts
+
+When admin clicks logout:
+1. the session cookie is removed
+2. the browser loses the admin session
+3. future admin access is blocked until login again
+
+--------------------------------------------------
+12. HOW EVERYTHING CONNECTS TOGETHER
+--------------------------------------------------
+Here is the full flow:
+
+A. Visitor opens webpage
+   -> home page loads
+   -> media data is read
+   -> cards are rendered
+
+B. Admin opens login page
+   -> enters username/password
+   -> login API checks values
+   -> cookie is created
+
+C. Admin enters dashboard
+   -> admin page loads
+   -> cookie is checked
+   -> page is allowed
+
+D. Admin adds new item
+   -> form data is collected
+   -> item is added to list
+   -> list is saved
+   -> homepage shows new content
+
+This is the whole working system.
+
+--------------------------------------------------
+13. WHAT IS READY FOR AZURE
+--------------------------------------------------
+The project is prepared for Azure hosting.
+
+The environment file contains Azure placeholders:
+- AZURE_STORAGE_ACCOUNT_NAME
+- AZURE_STORAGE_ACCOUNT_KEY
+- AZURE_STORAGE_CONTAINER_NAME
+
+This means in the future, the app can be connected to:
+- Azure App Service for hosting
+- Azure Blob Storage for videos and poster files
+- Azure Key Vault for stronger secrets management
+
+--------------------------------------------------
+14. WHAT IS STILL DEMO LEVEL
+--------------------------------------------------
+Right now, some things are still simple demo versions:
+- media content is stored locally
+- videos are linked through URLs
+- security is good for a starter project but can be stronger in production
+- upload is not yet fully connected to Azure cloud storage
+
+This is normal for a working first version.
+
+--------------------------------------------------
+15. SIMPLE SUMMARY
+--------------------------------------------------
+This app works in a simple way:
+
+- public page shows the media list
+- admin logs in securely
+- admin adds content to the library
+- new data is saved
+- the homepage refreshes with new content
+- Azure settings are ready for cloud deployment
+
+In short:
+The whole system is built like a mini streaming website with a secure admin manager and cloud-ready structure.
+
+--------------------------------------------------
+16. IMPORTANT NOTE
+--------------------------------------------------
+The default admin login is for local testing only.
+Before launching online, you must change the password and secret values in the .env file.
+
+Use a strong password and a long secret key for real deployment.
+
+--------------------------------------------------
+17. FINAL UNDERSTANDING
+--------------------------------------------------
+The project is not just one page.
+It is a full mini system made of:
+- frontend UI
+- content data
+- admin management
+- login protection
+- cloud-ready setup
+
+All of these parts work together to make the website function.
+
+END OF MANUAL

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "hero-1",
+    "title": "Midnight Drift",
+    "type": "Movie",
+    "genre": "Sci‑Fi",
+    "description": "A rogue pilot uncovers a hidden signal that changes the future of the city.",
+    "posterUrl": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80",
+    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+    "duration": "2h 09m",
+    "year": 2026,
+    "rating": "9.1",
+    "featured": true
+  },
+  {
+    "id": "hero-2",
+    "title": "Neon Tide",
+    "type": "Series",
+    "genre": "Drama",
+    "description": "A coastal family navigates love, loyalty, and danger in a city under pressure.",
+    "posterUrl": "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=900&q=80",
+    "videoUrl": "https://www.w3schools.com/html/movie.mp4",
+    "duration": "8 Episodes",
+    "year": 2025,
+    "rating": "8.8",
+    "featured": true
+  },
+  {
+    "id": "hero-3",
+    "title": "Velvet Code",
+    "type": "Movie",
+    "genre": "Action",
+    "description": "A brilliant cyber detective enters the city's underground network to stop a blackout.",
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=900&q=80",
+    "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+    "duration": "1h 48m",
+    "year": 2024,
+    "rating": "8.7"
+  },
+  {
+    "id": "hero-4",
+    "title": "Glass Horizon",
+    "type": "Series",
+    "genre": "Thriller",
+    "description": "In a city of mirrored towers, every secret is broadcast to the world.",
+    "posterUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80",
+    "videoUrl": "https://www.w3schools.com/html/movie.mp4",
+    "duration": "6 Episodes",
+    "year": 2026,
+    "rating": "9.0"
+  }
+]
